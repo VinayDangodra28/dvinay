@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Dvinay-Project-Compound Interest Calculator</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="css/styles-p.css" rel="stylesheet" />
+    <!-- Cheatsheet code -->
+    <link rel="stylesheet" href="css/prism.css">
+</head>
+
+<body>
+    <!-- Responsive navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container nav-text">
+
+            <a href="/dvinay" class="navbar-brand mb-1">dvinay&setmn;</a><a href="/dvinay/projects.html" class="navbar-brand mb-1">projects&setmn;</a><a class="navbar-brand mb-1" href="#">Project 1</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Page content-->
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-lg-8">
+                <!-- Post content-->
+                <article>
+                    <!-- Post header-->
+                    <header class="mb-4">
+                        <!-- Post title-->
+                        <h1 class="fw-bolder mb-1">Dvinay Compound Interest Calculator</h1>
+                        <!-- Post meta content-->
+                        <div class="text-muted fst-italic mb-2">Posted on December 5, 2021 by ~Vinay Dangodra</div>
+                        <!-- Post categories-->
+                        <a class="badge bg-secondary text-decoration-none link-light" href="#!">Flask</a>
+                        <a class="badge bg-secondary text-decoration-none link-light" href="#!">Python</a>
+                    </header>
+                    <!-- Preview image figure-->
+                    <figure class="mb-4">
+                        <!--    
+                            <img class="img-fluid rounded" src="images/project_1_banner.png" style="width: 100%;" alt=" ..." />
+                            -->
+                        <iframe id="frame" src="https://dvinaycompoundinterest.pythonanywhere.com/" scrolling="yes"
+                            height="500" width="100%" style="border:5px solid black;border-radius:20px; padding:10px"
+                            frameborder="0"></iframe>
+                    </figure>
+
+                    <!-- Post content-->
+                    <section class="mb-5">
+                        <p class="fs-5 mb-4">
+                            This is a compound interest calculator that calculates compound interest of bulk amount as
+                            well as monthly or yearly contributions. The backend logic of this project is written in
+                            python. The web framework used in Flask-Python.
+                            The frontend used is HTML Bootstrap and Javascript. The programming of the graph output is
+                            done in matplotlib and a image of the matplotlib graph is shown in html. The output in the
+                            Backend is generated in the form of python list and then converted to html list.
+                        </p>
+                        <p class="fs-5 mb-4">
+                            This project is hosted in the form of a website on <a
+                                href="https://dvinaycompoundinterest.pythonanywhere.com/"
+                                target="_blank">This link</a>
+                            <br>The exe file for the same is below here :-
+                            <a href="https://drive.google.com/uc?export=download&id=1936xUnsxlWNHhptX-DaPq__emU7WyoPM"
+                                target="_blank">Download</a>
+                        </p>
+                        <h2 class="fw-bolder mb-4 mt-5">The Code</h2>
+                        <p class="fs-5 mb-4">The calculator.py file is the file used to do the actual calculations. Its
+                            the logic behind the calculator app. It canbe used individually as a python script that can
+                            be run in a python environment.</p>
+                        <div class="code-toolbar">
+                            <pre class=" language-html">
+                                                <code class=" language-python">
+import matplotlib.pyplot as plt
+def percent_added(per, amount):
+    val = amount * (per/100)
+    final_val = amount + val
+    return final_val
+
+def ci(p, n, r, t, m):
+    x1 = [0]
+    graph_dict_1 = [10000]
+    graph_dict_2 = [10000]
+    alpha = p
+    monthly_amount_investment = p
+    x = t
+    a = p
+    c = n
+    y = m*12
+    h = m*6
+    q = m*3
+    # m = m
+    d = m*12/365
+    year_number = 0
+    while x>0:
+        while c>0:
+            if n==1:
+                monthly_amount_investment +=y
+                a = percent_added(r, a)
+                a += y
+            elif n==2:
+                monthly_amount_investment +=h
+                a = percent_added(r/2, a)
+                a += h
+            elif n==4:
+                monthly_amount_investment +=q
+                a = percent_added(r/4, a)
+                a += q
+            elif n==12:
+                monthly_amount_investment +=m
+                a = percent_added(r/12, a)
+                a += m
+            elif n==365:
+                monthly_amount_investment +=d
+                a = percent_added(r/365, a)
+                a += d
+            # print(f"month ended value {alpha}-{a}")
+            c -=1
+        c = n
+        x -=1
+        year_number +=1
+        x1.append(year_number)
+        graph_dict_1.append(monthly_amount_investment)
+        graph_dict_2.append(a)
+        # print(f"year ended value{a}")
+    # print(graph_dict)
+    plt.cla()
+    plt.plot(x1, graph_dict_1, label = "investment", marker='o', markersize=12)
+    plt.plot(x1, graph_dict_2, label = "return", marker='o', markersize=12)
+    plt.xlabel('Years')
+    plt.ylabel('Amount')
+    plt.title('Results')
+    plt.legend()
+    if __name__ == '__main__':
+
+        plt.show()
+    plt.savefig('/home/dvinaycompoundinterest/mysite/static/foo.png')
+    if n==1:
+        pr = p+(y*n*t)
+    elif n==2:
+        pr = p+(h*n*t)
+    elif n==4:
+        pr = p+(q*n*t)
+    elif n==12:
+        pr = p+(m*n*t)
+    elif n==365:
+        pr = p+(d*n*t)
+    # defining interest
+    i = a - pr
+    # Show results
+    if __name__ == '__main__':
+        print(f"Principle = {p} \nRate of interest = {r} % \nTotal amount invested= {pr} \nTotal amount got = {a}\nCompound interest = {i}")
+    total_percentage(pr, i)
+    tp = total_percentage(pr, i)
+    api_return = {
+        "":[1, 2],
+        "Principle":f"{p} ₹",
+        "Rate of interest":f"{r} %",
+        "Total amount invested" : f"{pr} ₹",
+        "Total amount received": f"{a} ₹",
+        "Compound interest" : f"{i} ₹",
+        "All over profit": f"{tp} %",
+        "Data for graph preparation": monthly_amount_investment
+    }
+    return(api_return)
+
+
+
+def total_percentage(p, i):
+    p = float(p)
+    i = float(i)
+    percentage = i/p*100
+    if __name__ == '__main__':
+        print(f"Total profit = {percentage} %")
+    return percentage
+
+if __name__=="__main__":
+    p = int(input("Enter Princilpe Value:-\n"))
+    r = float(input("Enter rate of interest per annum:-\n"))
+    # n = int(input("Enter number of times compound in a tenure:-\n"))
+    t = int(input("Enter number of years:-\n"))
+    abc = input("Enter 'y' for yearly deposits and 'm' for monthly deposits")
+    if abc == "m":
+        m = float(input("Enter monthly contributions:-\n"))
+    elif abc == "y":
+        m = float(input("Enter yearly contributions:-\n"))
+        m = m/12
+    xyz = input("Enter 'y' for yearly, 'h' for half yearly, 'q' for quarterly, 'm' for monthly, 'd' for daily compoundation")
+    if xyz == "y":
+        n = 1
+    elif xyz =="h":
+        n = 2
+    elif xyz =="q":
+        n = 4
+    elif xyz =="m":
+        n = 12
+    elif xyz =="d":
+        n = 365
+
+    ci(p, n, r, t, m)
+
+                                                </code>
+                                            </pre>
+                        </div>
+                        <p class="fs-5 mb-4">The app.py is the flask code in which the website actually runs on. It
+                            imports calculator.py as a module. Flask, rendertemplate and requests is used from flask.
+                        </p>
+                        <div class="code-toolbar">
+                            <pre class=" language-html">
+                                        <code class=" language-python">
+from flask import Flask, render_template, request
+from calculator import *
+app=Flask(__name__)
+
+
+def get_output(p, r, t, abc, m, n):
+    m = float(m)
+    if abc=="m":
+        con=m
+    if abc=="y":
+        con=m/12
+    answer = ci(p, n, r, t, con)
+    principle = answer['Principle']
+    roi = answer['Rate of interest']
+    amount_invested = answer['Total amount invested']
+    amount_got = answer['Total amount received']
+    interest = answer['Compound interest']
+    profit = answer['All over profit']
+    # output = f"Principle Amount: {principle}\n Rate of interest: {roi}\nTotal amount invested = {amount_invested}\nTotal return = {amount_got}\nCompound interest = {interest}\nAll oveer profit = {profit}"
+    output = [f"Principle Amount: {principle}",
+              f"Rate of interest: {roi}",
+              f"Total amount invested = {amount_invested}",
+              f"Total return = {amount_got}",
+              f"Compound interest = {interest}",
+              f"All over profit = {profit}"]
+    return output
+
+
+
+@app.route("/", methods=['GET', 'POST'])
+def first_page():
+
+    if request.method == 'POST':
+        p =request.form['p']
+        r = request.form['r']
+        t =request.form['t']
+        abc =request.form['abc']
+        m =request.form['m']
+        n =request.form['xyz']
+        p = float(p)
+        r = float(r)
+        t = float(t)
+        m = float(m)
+        n = float(n)
+
+        data_list = get_output(p, r, t, abc, m, n)
+
+        return render_template('index.html', output=data_list, flash_message="True")
+
+    return render_template('index.html', flash_message="False")
+
+
+# answer = ci(10000, 1, 10, 10, 1000)
+
+# print(answer)
+
+if __name__ == '__main__':
+    app.run(debug=True, host = "0.0.0.0")
+                                        </code>
+                                    </pre>
+                        </div>
+                        <p class="fs-5 mb-4">The frontend includes use of HTML Bootstrap and Javascript. It uses for
+                            loop of flask to show the list output. The HTML file is in the templates folder.</p>
+                        <div class="code-toolbar">
+                            <pre class=" language-html">
+                                        <code class=" language-html">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+    &lt;head&gt;
+        &lt;meta charset="utf-8" /&gt;
+        &lt;meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" /&gt;
+        &lt;meta name="description" content="" /&gt;
+        &lt;meta name="author" content="" /&gt;
+        &lt;title&gt;Clean Blog - Start Bootstrap Theme&lt;/title&gt;
+        &lt;link rel="icon" type="image/x-icon" href="assets/favicon.ico" /&gt;
+        &lt;!-- Font Awesome icons (free version)--&gt;
+        &lt;script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"&gt;&lt;/script&gt;
+        &lt;!-- Google fonts--&gt;
+        &lt;link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css" /&gt;
+        &lt;link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" /&gt;
+        &lt;!-- Core theme CSS (includes Bootstrap)--&gt;
+        &lt;link href="css/styles.css" rel="stylesheet" /&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;!-- Navigation--&gt;
+        &lt;nav class="navbar navbar-expand-lg navbar-light" id="mainNav"&gt;
+            &lt;div class="container px-4 px-lg-5"&gt;
+                &lt;a class="navbar-brand" href="index.html"&gt;Start Bootstrap&lt;/a&gt;
+                &lt;button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"&gt;
+                    Menu
+                    &lt;i class="fas fa-bars"&gt;&lt;/i&gt;
+                &lt;/button&gt;
+                &lt;div class="collapse navbar-collapse" id="navbarResponsive"&gt;
+                    &lt;ul class="navbar-nav ms-auto py-4 py-lg-0"&gt;
+                        &lt;li class="nav-item"&gt;&lt;a class="nav-link px-lg-3 py-3 py-lg-4" href="index.html"&gt;Home&lt;/a&gt;&lt;/li&gt;
+                        &lt;li class="nav-item"&gt;&lt;a class="nav-link px-lg-3 py-3 py-lg-4" href="about.html"&gt;About&lt;/a&gt;&lt;/li&gt;
+                        &lt;li class="nav-item"&gt;&lt;a class="nav-link px-lg-3 py-3 py-lg-4" href="post.html"&gt;Sample Post&lt;/a&gt;&lt;/li&gt;
+                        &lt;li class="nav-item"&gt;&lt;a class="nav-link px-lg-3 py-3 py-lg-4" href="contact.html"&gt;Contact&lt;/a&gt;&lt;/li&gt;
+                    &lt;/ul&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/nav&gt;
+        &lt;!-- Page Header--&gt;
+        &lt;header class="masthead" style="background-image: url('assets/img/about-bg.jpg')"&gt;
+            &lt;div class="container position-relative px-4 px-lg-5"&gt;
+                &lt;div class="row gx-4 gx-lg-5 justify-content-center"&gt;
+                    &lt;div class="col-md-10 col-lg-8 col-xl-7"&gt;
+                        &lt;div class="page-heading"&gt;
+                            &lt;h1&gt;About Me&lt;/h1&gt;
+                            &lt;span class="subheading"&gt;This is what I do.&lt;/span&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/header&gt;
+        &lt;!-- Main Content--&gt;
+        &lt;main class="mb-4"&gt;
+            &lt;div class="container px-4 px-lg-5"&gt;
+                &lt;div class="row gx-4 gx-lg-5 justify-content-center"&gt;
+                    &lt;div class="col-md-10 col-lg-8 col-xl-7"&gt;
+                        &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe nostrum ullam eveniet pariatur voluptates odit, fuga atque ea nobis sit soluta odio, adipisci quas excepturi maxime quae totam ducimus consectetur?&lt;/p&gt;
+                        &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius praesentium recusandae illo eaque architecto error, repellendus iusto reprehenderit, doloribus, minus sunt. Numquam at quae voluptatum in officia voluptas voluptatibus, minus!&lt;/p&gt;
+                        &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut consequuntur magnam, excepturi aliquid ex itaque esse est vero natus quae optio aperiam soluta voluptatibus corporis atque iste neque sit tempora!&lt;/p&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/main&gt;
+        &lt;!-- Footer--&gt;
+        &lt;footer class="border-top"&gt;
+            &lt;div class="container px-4 px-lg-5"&gt;
+                &lt;div class="row gx-4 gx-lg-5 justify-content-center"&gt;
+                    &lt;div class="col-md-10 col-lg-8 col-xl-7"&gt;
+                        &lt;ul class="list-inline text-center"&gt;
+                            &lt;li class="list-inline-item"&gt;
+                                &lt;a href="#!"&gt;
+                                    &lt;span class="fa-stack fa-lg"&gt;
+                                        &lt;i class="fas fa-circle fa-stack-2x"&gt;&lt;/i&gt;
+                                        &lt;i class="fab fa-twitter fa-stack-1x fa-inverse"&gt;&lt;/i&gt;
+                                    &lt;/span&gt;
+                                &lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li class="list-inline-item"&gt;
+                                &lt;a href="#!"&gt;
+                                    &lt;span class="fa-stack fa-lg"&gt;
+                                        &lt;i class="fas fa-circle fa-stack-2x"&gt;&lt;/i&gt;
+                                        &lt;i class="fab fa-facebook-f fa-stack-1x fa-inverse"&gt;&lt;/i&gt;
+                                    &lt;/span&gt;
+                                &lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li class="list-inline-item"&gt;
+                                &lt;a href="#!"&gt;
+                                    &lt;span class="fa-stack fa-lg"&gt;
+                                        &lt;i class="fas fa-circle fa-stack-2x"&gt;&lt;/i&gt;
+                                        &lt;i class="fab fa-github fa-stack-1x fa-inverse"&gt;&lt;/i&gt;
+                                    &lt;/span&gt;
+                                &lt;/a&gt;
+                            &lt;/li&gt;
+                        &lt;/ul&gt;
+                        &lt;div class="small text-center text-muted fst-italic"&gt;Copyright &copy; Your Website 2021&lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/footer&gt;
+        &lt;!-- Bootstrap core JS--&gt;
+        &lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"&gt;&lt;/script&gt;
+        &lt;!-- Core theme JS--&gt;
+        &lt;script src="js/scripts.js"&gt;&lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+
+                                        </code>
+                                    </pre>
+                        </div>
+                        <p class="fs-5 mb-4">Make a blank file foo.png in the static folder and your code dish is ready
+                            to be served(host).</p>
+                        <p class="fs-5 mb-4">The code is in this <a href="https://github.com/VinayDangodra28/dvinaycompoundinterest" target="_blank">link</a></p>
+            </div>
+            <!-- Side widgets-->
+            <div class="col-lg-4">
+                <!-- Search widget-->
+                <!--
+                    <div class="card mb-4">
+                        <div class="card-header">Search</div>
+                        <div class="card-body">
+                            <div class="input-group">
+                                <input class="form-control" type="text" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search" />
+                                <button class="btn btn-primary" id="button-search" type="button">Go!</button>
+                            </div>
+                        </div>
+                    </div>
+                -->
+                <!-- Categories widget-->
+                <div class="card mb-4">
+                    <div class="card-header">Categories</div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <ul class="list-unstyled mb-0">
+                                    <li><a href="projects.html">Web Design</a></li>
+                                    <li><a href="projects.html">Python</a></li>
+                                    <li><a href="projects.html">Flask</a></li>
+
+                                </ul>
+                            </div>
+                            <div class="col-sm-6">
+                                <ul class="list-unstyled mb-0">
+                                    <li><a href="projects.html">HTML</a></li>
+                                    <li><a href="projects.html">JavaScript</a></li>
+                                    <li><a href="projects.html">CSS</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Side widget-->
+                <div class="card mb-4">
+                    <div class="card-header">Help!</div>
+                    <div class="card-body">
+                        These are steps to use this program. <br>
+                        <ol>
+                            <li>Enter the Principle amount or the amount you invested in bulk in the start if no bulk
+                                investment is done enter 0 in it but don't leave it empty otherwise you would get an
+                                server error</li>
+                            <li>Select whether you do monthly contribution or yearly contribution to your investment and
+                                enter the amount of your contribution if you don't do contributions to your investment
+                                then enter 0 in the contribution amount section. If you withdrawing money instead of
+                                contributing enter a negative amount of withdrawal.</li>
+                            <li>Enter the no. of years you want your investment or SIP to last long.</li>
+                            <li>Enter the rate of interest you are getting from the investment or share.</li>
+                            <li>Select the compound frequency. If you get interst every year select the yearly option,
+                                and eventually yearly, half yearly, quaterly, montly or daily.</li>
+
+                        </ol>
+                    </div>
+                </div>
+                <form id="contact-form" method="POST" action="/" name="google-sheet">
+                    <div class="mb-3">
+                        <p>Give your suggesstions to me</p>
+                        
+                        <label class="form-label">Name</label>
+                        <input type="text" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <label for="exampleInputEmail1" class="form-label">Email</label>
+                        <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    </div>
+                    <div class="form-floating">
+                        <textarea class="form-control" name="message" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                        <label for="floatingTextarea2">Message</label>
+                      </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Footer-->
+    <footer class="py-5 bg-dark">
+        <div class="container">
+            <p class="m-0 text-center text-white"><a href="/dvinay" style="text-decoration:none;color:white">Dvinay</a> 2021
+            </p>
+        </div>
+    </footer>
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="js/scripts.js"></script>
+</body>
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbz7uY9JfMwdIVSXtHMixHGKksBrJ-Sq2Yol1HTgJYXdLdCpom-4ZNc0JgDdbtQ6AWmJaQ/exec'
+        const form = document.forms['google-sheet']
+        form.addEventListener('submit', e => {
+            e.preventDefault()
+            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+              .then(response => alert("Thanks for Contacting us..! We Will Contact You Soon..."))
+              .catch(error => console.error('Error!', error.message))
+          })
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</html>
