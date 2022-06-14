@@ -16,3 +16,15 @@ function myFunction() {
   // smooth scroll
   var navMenuAnchorTags = document.querySelectorAll('.nav-social-h a');
   console.log(navMenuAnchorTags);
+
+// preloader
+var loader = document.getElementById("preloader");
+setTimeout(timeout, 7000);
+function timeout() {
+  endAnimation();
+}
+function endAnimation() {
+    loader.setAttribute("class", "afterloader");
+}
+
+
