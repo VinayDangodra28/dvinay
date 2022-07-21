@@ -262,6 +262,10 @@ background-color: rgb(255, 94, 0);
     width: 50%;
     background-color: rgb(255, 0, 89);
 }
+.mysql{
+    width: 60%;
+    background-color: rgb(255, 0, 251);
+}
 .numpy{
     width: 75%;
     background-color: rgb(80, 83, 192);
